@@ -23,17 +23,21 @@ SOFTWARE.
 
 3RD PARTY EXCEPTIONS
 
-The geometry data for Somalia is a redistribution of a dataset from OCHA Somalia,
+The geometry data for Kenya is a redistribution of a dataset from OCHA ROSEA,
 with features and properties modified by Africa's Voices Foundation.
 Those files, along with their source and licence, are:
 
-- `geojson/somalia_regions.geojson`: Adapted from data produced by OCHA Somalia.
-Retrieved from https://data.humdata.org/dataset/somalia-administrative-boundaries
-January 2020. Licence "Other: humanitarian use only"
+- `geojson/kenya_counties.geojson`: Adapted from data produced by OCHA ROSEA.
+Retrieved from https://data.humdata.org/dataset/ken-administrative-boundaries
+March 2020. Licence "Other: humanitarian use only"
 
-- `geojson/somalia_districts.geojson`: Adapted from data produced by OCHA Somalia.
-Retrieved from https://data.humdata.org/dataset/somalia-administrative-boundaries
-April 2020. Licence "Other: humanitarian use only"
+- `geojson/kenya_constituencies.geojson`: Adapted from data produced by OCHA ROSEA.
+Retrieved from https://data.humdata.org/dataset/ken-administrative-boundaries
+March 2020. Licence "Other: humanitarian use only"
+
+- `geojson/kenya_lakes.geojson`: Adapted from data produced by OCHA ROSEA.
+Retrieved from https://data.humdata.org/dataset/kenya-water-bodies
+March 2020. Licence:
 
 Terms and Conditions of Use
 The use of this web site constitutes agreement with the following terms and conditions:
