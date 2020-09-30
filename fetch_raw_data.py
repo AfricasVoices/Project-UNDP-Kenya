@@ -6,8 +6,6 @@ from datetime import datetime
 from io import StringIO
 
 import pytz
-from core_data_modules.cleaners import Codes, PhoneCleaner
-from core_data_modules.cleaners.cleaning_utils import CleaningUtils
 from core_data_modules.logging import Logger
 from core_data_modules.traced_data import Metadata, TracedData
 from core_data_modules.traced_data.io import TracedDataJsonIO
@@ -19,36 +17,8 @@ from temba_client.v2 import Contact, Run
 
 from src.lib import PipelineConfiguration
 from src.lib.pipeline_configuration import RapidProSource, GCloudBucketSource, RecoveryCSVSource
-from configuration.code_imputation_functions import CodeSchemes
 
 log = Logger(__name__)
-
-
-def label_somalia_operator(user, traced_runs, phone_number_uuid_table):
-    # Set the operator codes for each message.
-    uuids = {td["avf_phone_id"] for td in traced_runs}
-    uuid_to_phone_lut = phone_number_uuid_table.uuid_to_data_batch(uuids)
-    for td in traced_runs:
-        operator_raw = uuid_to_phone_lut[td["avf_phone_id"]][:5]  # Returns the country code 252 and the next two digits
-
-        operator_code = PhoneCleaner.clean_operator(operator_raw)
-        if operator_code == Codes.NOT_CODED:
-            operator_label = CleaningUtils.make_label_from_cleaner_code(
-                CodeSchemes.SOMALIA_OPERATOR,
-                CodeSchemes.SOMALIA_OPERATOR.get_code_with_control_code(Codes.NOT_CODED),
-                Metadata.get_call_location()
-            )
-        else:
-            operator_label = CleaningUtils.make_label_from_cleaner_code(
-                CodeSchemes.SOMALIA_OPERATOR,
-                CodeSchemes.SOMALIA_OPERATOR.get_code_with_match_value(operator_code),
-                Metadata.get_call_location()
-            )
-
-        td.append_data({
-            "operator_raw": operator_raw,
-            "operator_coded": operator_label.to_dict()
-        }, Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
 
 
 def fetch_from_rapid_pro(user, google_cloud_credentials_file_path, raw_data_dir, phone_number_uuid_table,
@@ -104,9 +74,6 @@ def fetch_from_rapid_pro(user, google_cloud_credentials_file_path, raw_data_dir,
         # Convert the runs to TracedData.
         traced_runs = rapid_pro.convert_runs_to_traced_data(
             user, raw_runs, raw_contacts, phone_number_uuid_table, rapid_pro_source.test_contact_uuids)
-
-        if flow in rapid_pro_source.activation_flow_names:
-            label_somalia_operator(user, traced_runs, phone_number_uuid_table)
 
         log.info(f"Saving {len(raw_runs)} raw runs to {raw_runs_path}...")
         with open(raw_runs_path, "w") as raw_runs_file:
@@ -182,9 +149,6 @@ def fetch_from_recovery_csv(user, google_cloud_credentials_file_path, raw_data_d
                 TracedData(d, Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
             )
         log.info("Converted the recovered messages to TracedData")
-
-        if blob_url in recovery_csv_source.activation_flow_urls:
-            label_somalia_operator(user, traced_runs, phone_number_uuid_table)
 
         log.info(f"Exporting {len(traced_runs)} TracedData items to {traced_runs_output_path}...")
         IOUtils.ensure_dirs_exist_for_file(traced_runs_output_path)
