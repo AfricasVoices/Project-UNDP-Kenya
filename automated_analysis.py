@@ -159,13 +159,12 @@ if __name__ == "__main__":
             writer.writerow(row)
 
     log.info("Computing the demographic distributions...")
-    # Compute the number of individuals with each demographic code.
-    # Count excludes individuals who withdrew consent. STOP codes in each scheme are not exported, as it would look
+    # Count the number of individuals with each demographic code.
+    # This count excludes individuals who withdrew consent. STOP codes in each scheme are not exported, as it would look
     # like 0 individuals opted out otherwise, which could be confusing.
-    # TODO: Report percentages?
-    # TODO: Handle distributions for other variables too or just demographics?
-    demographic_distributions = OrderedDict()  # of analysis_file_key -> code string_value -> number of individuals
-    for plan in PipelineConfiguration.SURVEY_CODING_PLANS:
+    demographic_distributions = OrderedDict()  # of analysis_file_key -> code id -> number of individuals
+    total_relevant = OrderedDict()  # of analysis_file_key -> number of relevant individuals
+    for plan in PipelineConfiguration.DEMOG_CODING_PLANS:
         for cc in plan.coding_configurations:
             if cc.analysis_file_key is None:
                 continue
@@ -174,36 +173,57 @@ if __name__ == "__main__":
             for code in cc.code_scheme.codes:
                 if code.control_code == Codes.STOP:
                     continue
-                demographic_distributions[cc.analysis_file_key][code.string_value] = 0
+                demographic_distributions[cc.analysis_file_key][code.code_id] = 0
+            total_relevant[cc.analysis_file_key] = 0
 
     for ind in individuals:
         if ind["consent_withdrawn"] == Codes.TRUE:
             continue
 
-        for plan in PipelineConfiguration.SURVEY_CODING_PLANS:
+        for plan in PipelineConfiguration.DEMOG_CODING_PLANS:
             for cc in plan.coding_configurations:
-                if cc.include_in_theme_distribution == Codes.FALSE:
+                if cc.analysis_file_key is None or cc.include_in_theme_distribution == Codes.FALSE:
                     continue
 
+                assert cc.coding_mode == CodingModes.SINGLE
                 code = cc.code_scheme.get_code_with_code_id(ind[cc.coded_field]["CodeID"])
-                if code.control_code == Codes.STOP:
-                    continue
-                demographic_distributions[cc.analysis_file_key][code.string_value] += 1
+                demographic_distributions[cc.analysis_file_key][code.code_id] += 1
+                if code.code_type == CodeTypes.NORMAL:
+                    total_relevant[cc.analysis_file_key] += 1
 
     with open(f"{automated_analysis_output_dir}/demographic_distributions.csv", "w") as f:
-        headers = ["Demographic", "Code", "Number of Participants"]
+        headers = ["Demographic", "Code", "Participants with Opt-Ins", "Percent"]
         writer = csv.DictWriter(f, fieldnames=headers, lineterminator="\n")
         writer.writeheader()
 
-        last_demographic = None
-        for demographic, counts in demographic_distributions.items():
-            for code_string_value, number_of_participants in counts.items():
-                writer.writerow({
-                    "Demographic": demographic if demographic != last_demographic else "",
-                    "Code": code_string_value,
-                    "Number of Participants": number_of_participants
-                })
-                last_demographic = demographic
+        for plan in PipelineConfiguration.DEMOG_CODING_PLANS:
+            for cc in plan.coding_configurations:
+                if cc.analysis_file_key is None:
+                    continue
+
+                for i, code in enumerate(cc.code_scheme.codes):
+                    # Don't export a row for STOP codes because these have already been excluded, so would
+                    # report 0 here, which could be confusing.
+                    if code.control_code == Codes.STOP:
+                        continue
+
+                    participants_with_opt_ins = demographic_distributions[cc.analysis_file_key][code.code_id]
+                    row = {
+                        "Demographic": cc.analysis_file_key if i == 0 else "",
+                        "Code": code.string_value,
+                        "Participants with Opt-Ins": participants_with_opt_ins,
+                    }
+
+                    # Only compute a percentage for relevant codes.
+                    if code.code_type == CodeTypes.NORMAL:
+                        if total_relevant[cc.analysis_file_key] == 0:
+                            row["Percent"] = "-"
+                        else:
+                            row["Percent"] = round(participants_with_opt_ins / total_relevant[cc.analysis_file_key] * 100, 1)
+                    else:
+                        row["Percent"] = ""
+
+                    writer.writerow(row)
 
     # Compute the theme distributions
     log.info("Computing the theme distributions...")
