@@ -182,7 +182,7 @@ if __name__ == "__main__":
 
         for plan in PipelineConfiguration.DEMOG_CODING_PLANS:
             for cc in plan.coding_configurations:
-                if cc.analysis_file_key is None:
+                if cc.analysis_file_key is None or cc.include_in_theme_distribution == Codes.FALSE:
                     continue
 
                 assert cc.coding_mode == CodingModes.SINGLE
