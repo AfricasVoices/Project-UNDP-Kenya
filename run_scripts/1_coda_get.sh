@@ -24,9 +24,9 @@ DATASETS=(
     "UNDP_Kenya_s01e07"
     "UNDP_Kenya_s01e08"
 
-    "COVID_19_age"
-    "COVID_19_gender"
-    "COVID_19_location"
+    "COVID19_age"
+    "COVID19_gender"
+    "COVID19_location"
 )
 
 cd "$CODA_V2_ROOT/data_tools"
