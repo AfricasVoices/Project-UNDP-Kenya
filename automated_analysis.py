@@ -48,9 +48,8 @@ if __name__ == "__main__":
     automated_analysis_output_dir = args.automated_analysis_output_dir
 
     IOUtils.ensure_dirs_exist(automated_analysis_output_dir)
-    IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/regions")
-    IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/districts")
-    IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/mogadishu")
+    IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/counties")
+    IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/maps/constituencies")
     IOUtils.ensure_dirs_exist(f"{automated_analysis_output_dir}/graphs")
 
     log.info("Loading Pipeline Configuration File...")
@@ -387,22 +386,32 @@ if __name__ == "__main__":
 
         for sample in samples:
             writer.writerow(sample)
-    
-    log.info("Loading the Somali regions geojson...")
-    regions_map = geopandas.read_file("geojson/somalia_regions.geojson")
 
-    log.info("Generating a map of per-region participation for the season")
-    region_frequencies = dict()
-    for code in CodeSchemes.SOMALIA_REGION.codes:
+    # Produce maps of Kenya at county level
+    log.info("Loading the Kenya county geojson...")
+    counties_map = geopandas.read_file("geojson/kenya_counties.geojson")
+
+    log.info("Loading the Kenya lakes geojson...")
+    lakes_map = geopandas.read_file("geojson/kenya_lakes.geojson")
+    # Keep only Kenya's great lakes
+    lakes_map = lakes_map[lakes_map.LAKE_AVF.isin({"lake_turkana", "lake_victoria"})]
+
+    log.info("Generating a map of per-county participation for the season")
+    county_frequencies = dict()
+    labels = dict()
+    for code in CodeSchemes.KENYA_COUNTY.codes:
         if code.code_type == CodeTypes.NORMAL:
-            region_frequencies[code.string_value] = demographic_distributions["region"][code.string_value]
+            county_frequencies[code.string_value] = demographic_distributions["county"][code.code_id]
+            labels[code.string_value] = county_frequencies[code.string_value]
 
     fig, ax = plt.subplots()
-    MappingUtils.plot_frequency_map(regions_map, "ADM1_AVF", region_frequencies,
-                                    label_position_columns=("ADM1_LX", "ADM1_LY"),
-                                    callout_position_columns=("ADM1_CALLX", "ADM1_CALLY"), ax=ax)
-    plt.savefig(f"{automated_analysis_output_dir}/maps/regions/regions_total_participants.png", dpi=1200, bbox_inches="tight")
-    plt.close()
+    MappingUtils.plot_frequency_map(counties_map, "ADM1_AVF", county_frequencies, ax=ax,
+                                    labels=labels, label_position_columns=("ADM1_LX", "ADM1_LY"),
+                                    callout_position_columns=("ADM1_CALLX", "ADM1_CALLY"))
+    MappingUtils.plot_water_bodies(lakes_map, ax=ax)
+    fig.savefig(f"{automated_analysis_output_dir}/maps/counties/county_total_participants.png", dpi=1200,
+                bbox_inches="tight")
+    plt.close(fig)
 
     for rqa_plan in PipelineConfiguration.RQA_CODING_PLANS:
         episode = episodes[rqa_plan.raw_field]
@@ -410,99 +419,28 @@ if __name__ == "__main__":
         for rqa_cc in rqa_plan.coding_configurations:
             for survey_plan in PipelineConfiguration.SURVEY_CODING_PLANS:
                 for survey_cc in survey_plan.coding_configurations:
-                    if survey_cc.code_scheme != CodeSchemes.SOMALIA_REGION:
+                    if survey_cc.code_scheme != CodeSchemes.KENYA_COUNTY:
                         continue
 
-                    if survey_cc.include_in_theme_distribution == Codes.TRUE:
-                        # Plot a map of the total relevant participants for this coding configuration.
-                        rqa_total_region_frequencies = dict()
-                        for region_code in CodeSchemes.SOMALIA_REGION.codes:
-                            if region_code.code_type == CodeTypes.NORMAL:
-                                rqa_total_region_frequencies[region_code.string_value] = \
-                                    episode["Total Relevant Participants"][f"region:{region_code.string_value}"]
-
-                        fig, ax = plt.subplots()
-                        MappingUtils.plot_frequency_map(regions_map, "ADM1_AVF", rqa_total_region_frequencies,
-                                                        label_position_columns=("ADM1_LX", "ADM1_LY"),
-                                                        callout_position_columns=("ADM1_CALLX", "ADM1_CALLY"), ax=ax)
-                        plt.savefig(f"{automated_analysis_output_dir}/maps/regions/region_{rqa_cc.analysis_file_key}_1_total_relevant.png",
-                                    dpi=1200, bbox_inches="tight")
-                        plt.close()
-
-    # Plot maps of each of the normal themes for each coding plan if `generate_region_theme_distribution_maps`
-    # is set to True" in pipeline configuration.
-    if pipeline_configuration.automated_analysis.generate_region_theme_distribution_maps:
-        for rqa_plan in PipelineConfiguration.RQA_CODING_PLANS:
-            episode = episodes[rqa_plan.raw_field]
-
-            for rqa_cc in rqa_plan.coding_configurations:
-                map_index = 2  # (index 1 was used in the total relevant map's filename).
-                for code in rqa_cc.code_scheme.codes:
-                    if code.code_type != CodeTypes.NORMAL:
-                        continue
-
-                    theme = f"{rqa_cc.analysis_file_key}_{code.string_value}"
-                    log.info(f"Generating a map of per-region participation for {theme}...")
-                    demographic_counts = episode[theme]
-
-                    theme_region_frequencies = dict()
-                    for region_code in CodeSchemes.SOMALIA_REGION.codes:
-                        if region_code.code_type == CodeTypes.NORMAL:
-                            theme_region_frequencies[region_code.string_value] = \
-                                demographic_counts[f"region:{region_code.string_value}"]
+                    # Plot a map of the total relevant participants for this coding configuration.
+                    rqa_total_county_frequencies = dict()
+                    for county_code in CodeSchemes.KENYA_COUNTY.codes:
+                        if county_code.code_type == CodeTypes.NORMAL:
+                            rqa_total_county_frequencies[county_code.string_value] = \
+                                episode["Total Relevant Participants"][f"county:{county_code.string_value}"]
 
                     fig, ax = plt.subplots()
-                    MappingUtils.plot_frequency_map(regions_map, "ADM1_AVF", theme_region_frequencies,
+                    MappingUtils.plot_frequency_map(counties_map, "ADM1_AVF", rqa_total_county_frequencies,
                                                     label_position_columns=("ADM1_LX", "ADM1_LY"),
                                                     callout_position_columns=("ADM1_CALLX", "ADM1_CALLY"), ax=ax)
-                    plt.savefig(f"{automated_analysis_output_dir}/maps/regions/region_{rqa_cc.analysis_file_key}_{map_index}_{code.string_value}.png",
+                    MappingUtils.plot_water_bodies(lakes_map, ax=ax)
+                    plt.savefig(f"{automated_analysis_output_dir}/maps/counties/county_{rqa_cc.analysis_file_key}_1_total_relevant.png",
                                 dpi=1200, bbox_inches="tight")
                     plt.close()
 
-                    map_index += 1
-        log.info("Skipping generating a map of per-region theme participation because "
-                 "`generate_region_theme_distribution_maps` is set to False")
-
-    log.info("Loading the Somalia districts geojson...")
-    districts_map = geopandas.read_file("geojson/somalia_districts.geojson")
-
-    log.info("Generating a map of per-district participation for the season")
-    district_frequencies = dict()
-    for code in CodeSchemes.SOMALIA_DISTRICT.codes:
-        if code.code_type == CodeTypes.NORMAL:
-            district_frequencies[code.string_value] = demographic_distributions["district"][code.string_value]
-
-    fig, ax = plt.subplots()
-    MappingUtils.plot_frequency_map(districts_map, "ADM2_AVF", district_frequencies, ax=ax)
-    plt.savefig(f"{automated_analysis_output_dir}/maps/districts/district_total_participants.png", dpi=1200, bbox_inches="tight")
-    plt.close(fig)
-
-    for rqa_plan in PipelineConfiguration.RQA_CODING_PLANS:
-        episode = episodes[rqa_plan.raw_field]
-
-        for rqa_cc in rqa_plan.coding_configurations:
-            for survey_plan in PipelineConfiguration.SURVEY_CODING_PLANS:
-                for survey_cc in survey_plan.coding_configurations:
-                    if survey_cc.code_scheme != CodeSchemes.SOMALIA_DISTRICT:
-                        continue
-                    if survey_cc.include_in_theme_distribution == Codes.TRUE:
-
-                        # Plot a map of the total relevant participants for this coding configuration.
-                        rqa_total_district_frequencies = dict()
-                        for district_code in CodeSchemes.SOMALIA_DISTRICT.codes:
-                            if district_code.code_type == CodeTypes.NORMAL:
-                                rqa_total_district_frequencies[district_code.string_value] = \
-                                    episode["Total Relevant Participants"][f"district:{district_code.string_value}"]
-
-                        fig, ax = plt.subplots()
-                        MappingUtils.plot_frequency_map(districts_map, "ADM2_AVF", rqa_total_district_frequencies, ax=ax)
-                        plt.savefig(f"{automated_analysis_output_dir}/maps/districts/district_{rqa_cc.analysis_file_key}_1_total_relevant.png",
-                                    dpi=1200, bbox_inches="tight")
-                        plt.close(fig)
-
-    # Plot maps of each of the normal themes for each coding plan if `generate_district_theme_distribution_maps`
+    # Plot maps of each of the normal themes for each coding plan if `generate_county_theme_distribution_maps`
     # is set to True" in pipeline configuration.
-    if pipeline_configuration.automated_analysis.generate_district_theme_distribution_maps:
+    if pipeline_configuration.automated_analysis.generate_county_theme_distribution_maps:
         for rqa_plan in PipelineConfiguration.RQA_CODING_PLANS:
             episode = episodes[rqa_plan.raw_field]
 
@@ -513,68 +451,79 @@ if __name__ == "__main__":
                         continue
 
                     theme = f"{rqa_cc.analysis_file_key}_{code.string_value}"
-                    log.info(f"Generating a map of per-district participation for {theme}...")
+                    log.info(f"Generating a map of per-county participation for {theme}...")
                     demographic_counts = episode[theme]
 
-                    theme_district_frequencies = dict()
-                    for district_code in CodeSchemes.SOMALIA_DISTRICT.codes:
-                        if district_code.code_type == CodeTypes.NORMAL:
-                            theme_district_frequencies[district_code.string_value] = \
-                                demographic_counts[f"district:{district_code.string_value}"]
+                    theme_county_frequencies = dict()
+                    for county_code in CodeSchemes.KENYA_COUNTY.codes:
+                        if county_code.code_type == CodeTypes.NORMAL:
+                            theme_county_frequencies[county_code.string_value] = \
+                                demographic_counts[f"county:{county_code.string_value}"]
 
                     fig, ax = plt.subplots()
-                    MappingUtils.plot_frequency_map(districts_map, "ADM2_AVF", theme_district_frequencies, ax=ax)
-                    plt.savefig(
-                        f"{automated_analysis_output_dir}/maps/districts/district_{rqa_cc.analysis_file_key}_{map_index}_{code.string_value}.png",
+                    MappingUtils.plot_frequency_map(counties_map, "ADM1_AVF", theme_county_frequencies, ax=ax,
+                                                    label_position_columns=("ADM1_LX", "ADM1_LY"),
+                                                    callout_position_columns=("ADM1_CALLX", "ADM1_CALLY"))
+                    MappingUtils.plot_water_bodies(lakes_map, ax=ax)
+                    fig.savefig(
+                        f"{automated_analysis_output_dir}/maps/counties/county_{rqa_cc.analysis_file_key}_{map_index}_{code.string_value}.png",
                         dpi=1200, bbox_inches="tight")
                     plt.close(fig)
 
                     map_index += 1
-    log.info("Skipping generating a map of per-district theme participation because "
-             "`generate_district_theme_distribution_maps` is set to False")
+    else:
+        log.info("Skipping generating a map of per-county theme participation because "
+                 "`generate_county_theme_distribution_maps` is set to False")
 
-    log.info("Loading the Mogadishu sub-district geojson...")
-    mogadishu_map = geopandas.read_file("geojson/mogadishu_sub_districts.geojson")
+    # Produce maps of Kenya at constituency level
+    log.info("Loading the Kenya constituency geojson...")
+    constituencies_map = geopandas.read_file("geojson/kenya_constituencies.geojson")
 
-    log.info("Generating a map of Mogadishu participation for the season...")
-    mogadishu_frequencies = dict()
-    for code in CodeSchemes.MOGADISHU_SUB_DISTRICT.codes:
+    log.info("Generating a map of per-constituency participation for the season")
+    constituency_frequencies = dict()
+    for code in CodeSchemes.KENYA_CONSTITUENCY.codes:
         if code.code_type == CodeTypes.NORMAL:
-            mogadishu_frequencies[code.string_value] = demographic_distributions["mogadishu_sub_district"][
-                code.string_value]
+            constituency_frequencies[code.string_value] = demographic_distributions["constituency"][code.code_id]
 
     fig, ax = plt.subplots()
-    MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", mogadishu_frequencies, ax=ax,
-                                    label_position_columns=("ADM3_LX", "ADM3_LY"))
-    plt.savefig(f"{automated_analysis_output_dir}/maps/mogadishu/mogadishu_total_participants.png", dpi=1200, bbox_inches="tight")
+    MappingUtils.plot_frequency_map(constituencies_map, "ADM2_AVF", constituency_frequencies, ax=ax)
+    MappingUtils.plot_inset_frequency_map(
+        constituencies_map, "ADM2_AVF", constituency_frequencies,
+        inset_region=(36.62, -1.46, 37.12, -1.09), zoom=3, inset_position=(35.60, -2.95), ax=ax)
+    MappingUtils.plot_water_bodies(lakes_map, ax=ax)
+    plt.savefig(f"{automated_analysis_output_dir}/maps/constituencies/constituency_total_participants.png",
+                dpi=1200, bbox_inches="tight")
     plt.close(fig)
 
     for rqa_plan in PipelineConfiguration.RQA_CODING_PLANS:
         episode = episodes[rqa_plan.raw_field]
+
         for rqa_cc in rqa_plan.coding_configurations:
             for survey_plan in PipelineConfiguration.SURVEY_CODING_PLANS:
                 for survey_cc in survey_plan.coding_configurations:
-                    if survey_cc.code_scheme != CodeSchemes.MOGADISHU_SUB_DISTRICT:
+                    if survey_cc.code_scheme != CodeSchemes.KENYA_CONSTITUENCY:
                         continue
-                    if  survey_cc.include_in_theme_distribution == Codes.TRUE:
 
-                        # Plot a map of the total relevant participants for this coding configuration.
-                        rqa_total_mogadishu_frequencies = dict()
-                        for sub_district_code in CodeSchemes.MOGADISHU_SUB_DISTRICT.codes:
-                            if sub_district_code.code_type == CodeTypes.NORMAL:
-                                rqa_total_mogadishu_frequencies[sub_district_code.string_value] = \
-                                    episode["Total Relevant Participants"][f"mogadishu_sub_district:{sub_district_code.string_value}"]
+                    # Plot a map of the total relevant participants for this coding configuration.
+                    rqa_total_constituency_frequencies = dict()
+                    for constituency_code in CodeSchemes.KENYA_CONSTITUENCY.codes:
+                        if constituency_code.code_type == CodeTypes.NORMAL:
+                            rqa_total_constituency_frequencies[constituency_code.string_value] = \
+                                episode["Total Relevant Participants"][f"constituency:{constituency_code.string_value}"]
 
-                        fig, ax = plt.subplots()
-                        MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", rqa_total_mogadishu_frequencies, ax=ax,
-                                                        label_position_columns=("ADM3_LX", "ADM3_LY"))
-                        plt.savefig(f"{automated_analysis_output_dir}/maps/mogadishu/mogadishu_{rqa_cc.analysis_file_key}_1_total_relevant.png",
-                                    dpi=1200, bbox_inches="tight")
-                        plt.close(fig)
+                    fig, ax = plt.subplots()
+                    MappingUtils.plot_frequency_map(constituencies_map, "ADM2_AVF", rqa_total_constituency_frequencies, ax=ax)
+                    MappingUtils.plot_inset_frequency_map(
+                        constituencies_map, "ADM2_AVF", rqa_total_constituency_frequencies,
+                        inset_region=(36.62, -1.46, 37.12, -1.09), zoom=3, inset_position=(35.60, -2.95), ax=ax)
+                    MappingUtils.plot_water_bodies(lakes_map, ax=ax)
+                    plt.savefig(f"{automated_analysis_output_dir}/maps/constituencies/constituency_{rqa_cc.analysis_file_key}_1_total_relevant.png",
+                                dpi=1200, bbox_inches="tight")
+                    plt.close(fig)
 
-    # Plot maps of each of the normal themes for each coding plan if `generate_mogadishu_theme_distribution_maps`
+    # Plot maps of each of the normal themes for each coding plan if `generate_constituency_theme_distribution_maps`
     # is set to True" in pipeline configuration.
-    if pipeline_configuration.automated_analysis.generate_mogadishu_theme_distribution_maps:
+    if pipeline_configuration.automated_analysis.generate_constituency_theme_distribution_maps:
         for rqa_plan in PipelineConfiguration.RQA_CODING_PLANS:
             episode = episodes[rqa_plan.raw_field]
 
@@ -585,25 +534,29 @@ if __name__ == "__main__":
                         continue
 
                     theme = f"{rqa_cc.analysis_file_key}_{code.string_value}"
-                    log.info(f"Generating a map of Mogadishu participation for {theme}...")
+                    log.info(f"Generating a map of per-constituency participation for {theme}...")
                     demographic_counts = episode[theme]
 
-                    mogadishu_theme_frequencies = dict()
-                    for sub_district_code in CodeSchemes.MOGADISHU_SUB_DISTRICT.codes:
-                        if sub_district_code.code_type == CodeTypes.NORMAL:
-                            mogadishu_theme_frequencies[sub_district_code.string_value] = \
-                                demographic_counts[f"mogadishu_sub_district:{sub_district_code.string_value}"]
+                    theme_constituency_frequencies = dict()
+                    for constituency_code in CodeSchemes.KENYA_CONSTITUENCY.codes:
+                        if constituency_code.code_type == CodeTypes.NORMAL:
+                            theme_constituency_frequencies[constituency_code.string_value] = \
+                                demographic_counts[f"constituency:{constituency_code.string_value}"]
 
                     fig, ax = plt.subplots()
-                    MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", mogadishu_theme_frequencies, ax=ax,
-                                                    label_position_columns=("ADM3_LX", "ADM3_LY"))
+                    MappingUtils.plot_frequency_map(constituencies_map, "ADM2_AVF", theme_constituency_frequencies, ax=ax)
+                    MappingUtils.plot_inset_frequency_map(
+                        constituencies_map, "ADM2_AVF", theme_constituency_frequencies,
+                        inset_region=(36.62, -1.46, 37.12, -1.09), zoom=3, inset_position=(35.60, -2.95), ax=ax)
+                    MappingUtils.plot_water_bodies(lakes_map, ax=ax)
                     plt.savefig(
-                        f"{automated_analysis_output_dir}/maps/mogadishu/mogadishu_{rqa_cc.analysis_file_key}_{map_index}_{code.string_value}.png",
+                        f"{automated_analysis_output_dir}/maps/constituencies/constituency_{rqa_cc.analysis_file_key}_{map_index}_{code.string_value}.png",
                         dpi=1200, bbox_inches="tight")
                     plt.close(fig)
 
                     map_index += 1
-    log.info("Skipping generating a map of mogadishu theme participation because "
-             "`generate_mogadishu_theme_distribution_maps` is set to False")
+    else:
+        log.info("Skipping generating a map of per-constituency theme participation because "
+                 "`generate_constituency_theme_distribution_maps` is set to False")
 
-    log.info("automated analysis python script complete")
+    log.info("Automated analysis python script complete")

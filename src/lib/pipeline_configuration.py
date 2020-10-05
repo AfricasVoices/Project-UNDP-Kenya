@@ -452,9 +452,9 @@ class DriveUpload(object):
         validators.validate_string(self.individuals_upload_path, "individuals_upload_path")
         validators.validate_string(self.automated_analysis_dir, "automated_analysis_dir")
 
+
 class AutomatedAnalysis(object):
-    def __init__(self, generate_region_theme_distribution_maps, generate_district_theme_distribution_maps,
-                 generate_mogadishu_theme_distribution_maps):
+    def __init__(self, generate_county_theme_distribution_maps, generate_constituency_theme_distribution_maps):
         """
         :param generate_region_theme_distribution_maps: Whether to generate somali region theme distribution maps.
         :type generate_region_theme_distribution_maps: bool
@@ -463,25 +463,20 @@ class AutomatedAnalysis(object):
         :param generate_mogadishu_theme_distribution_maps: Whether to generate mogadishu sub-district theme distribution maps.
         :type generate_mogadishu_theme_distribution_maps: bool
         """
-        self.generate_region_theme_distribution_maps = generate_region_theme_distribution_maps
-        self.generate_district_theme_distribution_maps = generate_district_theme_distribution_maps
-        self.generate_mogadishu_theme_distribution_maps = generate_mogadishu_theme_distribution_maps
+        self.generate_county_theme_distribution_maps = generate_county_theme_distribution_maps
+        self.generate_constituency_theme_distribution_maps = generate_constituency_theme_distribution_maps
 
         self.validate()
 
     @classmethod
     def from_configuration_dict(cls, configuration_dict):
-        generate_region_theme_distribution_maps = configuration_dict["GenerateRegionThemeDistributionMaps"]
-        generate_district_theme_distribution_maps = configuration_dict["GenerateDistrictThemeDistributionMaps"]
-        generate_mogadishu_theme_distribution_maps = configuration_dict["GenerateMogadishuThemeDistributionMaps"]
+        generate_county_theme_distribution_maps = configuration_dict["GenerateCountyThemeDistributionMaps"]
+        generate_constituency_theme_distribution_maps = configuration_dict["GenerateConstituencyThemeDistributionMaps"]
 
-        return cls (generate_region_theme_distribution_maps, generate_district_theme_distribution_maps,
-                   generate_mogadishu_theme_distribution_maps)
+        return cls(generate_county_theme_distribution_maps, generate_constituency_theme_distribution_maps)
 
     def validate(self):
-        validators.validate_bool(self.generate_region_theme_distribution_maps,
-                                 "generate_region_theme_distribution_maps")
-        validators.validate_bool(self.generate_district_theme_distribution_maps,
-                                 "generate_district_theme_distribution_maps")
-        validators.validate_bool(self.generate_mogadishu_theme_distribution_maps,
-                                 "generate_mogadishu_theme_distribution_maps")
+        validators.validate_bool(self.generate_county_theme_distribution_maps,
+                                 "generate_county_theme_distribution_maps")
+        validators.validate_bool(self.generate_constituency_theme_distribution_maps,
+                                 "generate_constituency_theme_distribution_maps")
