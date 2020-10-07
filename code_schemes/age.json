@@ -1146,6 +1146,42 @@
       "NumericValue": -100070,
       "StringValue": "exclusion_complaint",
       "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-GR-e6de1b7e",
+      "CodeType": "Meta",
+      "MetaCode": "gratitude",
+      "DisplayText": "meta: gratitude",
+      "NumericValue": -100100,
+      "StringValue": "gratitude",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-AC-9ed22631",
+      "CodeType": "Meta",
+      "MetaCode": "about_conversation",
+      "DisplayText": "meta: about conversation",
+      "NumericValue": -100120,
+      "StringValue": "about_conversation",
+      "VisibleInCoda": false
+    },
+    {
+      "CodeID": "code-CR-8e99616b",
+      "CodeType": "Meta",
+      "MetaCode": "chasing_reply",
+      "DisplayText": "meta: chasing reply",
+      "NumericValue": -100130,
+      "StringValue": "chasing_reply",
+      "VisibleInCoda": false
+    },
+    {
+      "CodeID": "code-I-b13a41f6",
+      "CodeType": "Meta",
+      "MetaCode": "impact",
+      "DisplayText": "meta: impact",
+      "StringValue": "impact",
+      "NumericValue": -100140,
+      "VisibleInCoda": false
     }
   ]
 }
