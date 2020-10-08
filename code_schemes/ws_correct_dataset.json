@@ -1,0 +1,243 @@
+{
+  "SchemeID": "Scheme-ffff43a6",
+  "Name": "WS - Correct Dataset",
+  "Version": "0.0.0.3",
+  "Codes": [
+    {
+      "CodeID": "code-dda6e4b4",
+      "CodeType": "Normal",
+      "DisplayText": "location",
+      "StringValue": "location",
+      "NumericValue": 3,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "location"
+      ]
+    },
+    {
+      "CodeID": "code-70ac05ab",
+      "CodeType": "Normal",
+      "DisplayText": "age",
+      "StringValue": "age",
+      "NumericValue": 1,
+      "VisibleInCoda": true,
+      "MatchValues":  [
+        "age"
+      ]
+    },
+    {
+      "CodeID": "code-6774cedd",
+      "CodeType": "Normal",
+      "DisplayText": "gender",
+      "StringValue": "gender",
+      "NumericValue": 2,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "gender"
+      ]
+    },
+    {
+      "CodeID": "code-f1791199",
+      "CodeType": "Normal",
+      "DisplayText": "UNDP-Kenya s01e01",
+      "StringValue": "undp_kenya_s01e01",
+      "NumericValue": 12,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "UNDP-Kenya s01e01"
+      ]
+    },
+    {
+      "CodeID": "code-652b4fe8",
+      "CodeType": "Normal",
+      "DisplayText": "UNDP-Kenya s01e02",
+      "StringValue": "undp_kenya_s01e02",
+      "NumericValue": 13,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "UNDP-Kenya s01e02"
+      ]
+    },
+    {
+      "CodeID": "code-64decee7",
+      "CodeType": "Normal",
+      "DisplayText": "UNDP-Kenya s01e03",
+      "StringValue": "undp_kenya_s01e03",
+      "NumericValue": 14,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "UNDP-Kenya s01e03"
+      ]
+    },
+    {
+      "CodeID": "code-9ee88d2e",
+      "CodeType": "Normal",
+      "DisplayText": "UNDP-Kenya s01e04",
+      "StringValue": "undp_kenya_s01e04",
+      "NumericValue": 15,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "UNDP-Kenya s01e04"
+      ]
+    },
+    {
+      "CodeID": "code-f5ac097b",
+      "CodeType": "Normal",
+      "DisplayText": "UNDP-Kenya s01e05",
+      "StringValue": "undp_kenya_s01e05",
+      "NumericValue": 16,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "UNDP-Kenya s01e05"
+      ]
+    },
+    {
+      "CodeID": "code-3ffde4f3",
+      "CodeType": "Normal",
+      "DisplayText": "UNDP-Kenya s01e06",
+      "StringValue": "undp_kenya_s01e06",
+      "NumericValue": 17,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "UNDP-Kenya s01e06"
+      ]
+    },
+    {
+      "CodeID": "code-a7874fc3",
+      "CodeType": "Normal",
+      "DisplayText": "UNDP-Kenya s01e07",
+      "StringValue": "undp_kenya_s01e07",
+      "NumericValue": 18,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "UNDP-Kenya s01e07"
+      ]
+    },
+    {
+      "CodeID": "code-57077ba9",
+      "CodeType": "Normal",
+      "DisplayText": "UNDP-Kenya s01e08",
+      "StringValue": "undp_kenya_s01e08",
+      "NumericValue": 19,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "UNDP-Kenya s01e08"
+      ]
+    },
+    {
+      "CodeID": "code-9bd0f2b1",
+      "CodeType": "Normal",
+      "DisplayText": "COVID19 s01e01",
+      "StringValue": "covid19_s01e01",
+      "NumericValue": 4,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "COVID19 s01e01"
+      ]
+    },
+    {
+      "CodeID": "code-61f91d7c",
+      "CodeType": "Normal",
+      "DisplayText": "COVID19 s01e02",
+      "StringValue": "covid19_s01e02",
+      "NumericValue": 5,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "COVID19 s01e02"
+      ]
+    },
+    {
+      "CodeID": "code-4dc81f3b",
+      "CodeType": "Normal",
+      "DisplayText": "COVID19-KE-Urban s01e01",
+      "StringValue": "covid19_ke_urban_s01e01",
+      "NumericValue": 6,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "COVID19-KE-Urban s01e01"
+      ]
+    },
+    {
+      "CodeID": "code-44371d98",
+      "CodeType": "Normal",
+      "DisplayText": "COVID19-KE-Urban s01e02",
+      "StringValue": "covid19_ke_urban_s01e02",
+      "NumericValue": 7,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "COVID19-KE-Urban s01e02"
+      ]
+    },
+    {
+      "CodeID": "code-9113887d",
+      "CodeType": "Normal",
+      "DisplayText": "COVID19-KE-Urban s01e03",
+      "StringValue": "covid19_ke_urban_s01e03",
+      "NumericValue": 8,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "COVID19-KE-Urban s01e03"
+      ]
+    },
+    {
+      "CodeID": "code-eaaec5b8",
+      "CodeType": "Normal",
+      "DisplayText": "COVID19-KE-Urban s01e04",
+      "StringValue": "covid19_ke_urban_s01e04",
+      "NumericValue": 9,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "COVID19-KE-Urban s01e04"
+      ]
+    },
+    {
+      "CodeID": "code-bf7e7e9f",
+      "CodeType": "Normal",
+      "DisplayText": "COVID19-KE-Urban s01e05",
+      "StringValue": "covid19_ke_urban_s01e05",
+      "NumericValue": 10,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "COVID19-KE-Urban s01e05"
+      ]
+    },
+    {
+      "CodeID": "code-1770ab02",
+      "CodeType": "Normal",
+      "DisplayText": "COVID19-KE-Urban s01e06",
+      "StringValue": "covid19_ke_urban_s01e06",
+      "NumericValue": 11,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "COVID19-KE-Urban s01e06"
+      ]
+    },
+    {
+      "CodeID": "code-NC-42f1d983",
+      "CodeType": "Control",
+      "ControlCode": "NC",
+      "DisplayText": "NC (not coded)",
+      "NumericValue": -30,
+      "StringValue": "NC",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-NR-5e3eee23",
+      "CodeType": "Control",
+      "ControlCode": "NR",
+      "DisplayText": "NR (not reviewed)",
+      "NumericValue": -40,
+      "StringValue": "NR",
+      "VisibleInCoda": false
+    },
+    {
+      "CodeID": "code-CE-016c1e22",
+      "CodeType": "Control",
+      "ControlCode": "CE",
+      "DisplayText": "CE (coding error)",
+      "NumericValue": -110,
+      "StringValue": "CE",
+      "VisibleInCoda": false
+    }
+  ]
+}
