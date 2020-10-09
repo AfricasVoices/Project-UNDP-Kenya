@@ -1,0 +1,88 @@
+{
+  "PipelineName": "UNDP-Kenya",
+  "RawDataSources": [
+    {
+      "SourceType": "RapidPro",
+      "Domain": "textit.in",
+      "TokenFileURL": "gs://avf-credentials/covid19-2-text-it-token.txt",
+      "ContactsFileName": "covid19_2_contacts",
+      "ActivationFlowNames": [
+        "undp_kenya_s01e01_activation"
+      ],
+      "SurveyFlowNames": [
+        "undp_kenya_s01_demog",
+        "covid19_ke_urban_s01_demog"
+      ],
+      "TestContactUUIDs": [
+        "eed078e5-7d13-4f3c-ac93-8b477125b31d",
+        "67836f40-a155-4757-850c-b407bd1cd475"
+      ]
+    },
+    {
+      "SourceType": "RapidPro",
+      "Domain": "textit.in",
+      "TokenFileURL": "gs://avf-credentials/covid19-text-it-token.txt",
+      "ContactsFileName": "covid19_contacts",
+      "ActivationFlowNames": [
+
+      ],
+      "SurveyFlowNames": [
+        "covid19_s01_demog"
+      ],
+      "TestContactUUIDs": [
+        "59fff919-ffe6-4baa-a674-c1a11b956445",
+        "0265fb3d-a139-4ed4-bb6d-7552e5be5e59"
+      ]
+    }
+  ],
+  "PhoneNumberUuidTable": {
+    "FirebaseCredentialsFileURL": "gs://avf-credentials/avf-id-infrastructure-firebase-adminsdk-6xps8-b9173f2bfd.json",
+    "TableName": "UNDP_Kenya_phone_number_avf_phone_id"
+  },
+  "RapidProKeyRemappings": [
+    {"RapidProKey": "avf_phone_id", "PipelineKey": "uid"},
+    
+    {"RapidProKey": "Rqa_S01E01 (Text) - undp_kenya_s01e01_activation", "PipelineKey": "rqa_s01e01_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S01E01 (Run ID) - undp_kenya_s01e01_activation", "PipelineKey": "rqa_s01e01_run_id"},
+    {"RapidProKey": "Rqa_S01E01 (Time) - undp_kenya_s01e01_activation", "PipelineKey": "sent_on"},
+
+    {"RapidProKey": "Constituency (Text) - covid19_s01_demog", "PipelineKey": "location_raw"},
+    {"RapidProKey": "Constituency (Time) - covid19_s01_demog", "PipelineKey": "location_time"},
+    {"RapidProKey": "Gender (Text) - covid19_s01_demog", "PipelineKey": "gender_raw"},
+    {"RapidProKey": "Gender (Time) - covid19_s01_demog", "PipelineKey": "gender_time"},
+    {"RapidProKey": "Age (Text) - covid19_s01_demog", "PipelineKey": "age_raw"},
+    {"RapidProKey": "Age (Time) - covid19_s01_demog", "PipelineKey": "age_time"},
+
+    {"RapidProKey": "Constituency (Text) - covid19_ke_urban_s01_demog", "PipelineKey": "location_raw"},
+    {"RapidProKey": "Constituency (Time) - covid19_ke_urban_s01_demog", "PipelineKey": "location_time"},
+    {"RapidProKey": "Gender (Text) - covid19_ke_urban_s01_demog", "PipelineKey": "gender_raw"},
+    {"RapidProKey": "Gender (Time) - covid19_ke_urban_s01_demog", "PipelineKey": "gender_time"},
+    {"RapidProKey": "Age (Text) - covid19_ke_urban_s01_demog", "PipelineKey": "age_raw"},
+    {"RapidProKey": "Age (Time) - covid19_ke_urban_s01_demog", "PipelineKey": "age_time"},
+
+    {"RapidProKey": "Constituency (Text) - undp_kenya_s01_demog", "PipelineKey": "location_raw"},
+    {"RapidProKey": "Constituency (Time) - undp_kenya_s01_demog", "PipelineKey": "location_time"},
+    {"RapidProKey": "Gender (Text) - undp_kenya_s01_demog", "PipelineKey": "gender_raw"},
+    {"RapidProKey": "Gender (Time) - undp_kenya_s01_demog", "PipelineKey": "gender_time"},
+    {"RapidProKey": "Age (Text) - undp_kenya_s01_demog", "PipelineKey": "age_raw"},
+    {"RapidProKey": "Age (Time) - undp_kenya_s01_demog", "PipelineKey": "age_time"}
+  ],
+  "ProjectStartDate": "2000-01-01T00:00:00+03:00",
+  "ProjectEndDate": "2100-01-01T00:00:00+03:00",
+  "FilterTestMessages": false,
+  "MoveWSMessages": true,
+  "AutomatedAnalysis": {
+    "GenerateCountyThemeDistributionMaps": true,
+    "GenerateConstituencyThemeDistributionMaps": true
+  },
+  "DriveUpload": {
+    "DriveCredentialsFileURL": "gs://avf-credentials/pipeline-runner-service-acct-avf-data-core-64cc71459fe7.json",
+    "ProductionUploadPath": "undp_kenya_analysis_outputs/undp_kenya_production.csv",
+    "MessagesUploadPath": "undp_kenya_analysis_outputs/undp_kenya_messages.csv",
+    "IndividualsUploadPath": "undp_kenya_analysis_outputs/undp_kenya_individuals.csv",
+    "AutomatedAnalysisDir": "undp_kenya_analysis_outputs/automated_analysis"
+  },
+  "MemoryProfileUploadBucket": "gs://avf-pipeline-logs-performance-nearline",
+  "DataArchiveUploadBucket": "gs://pipeline-execution-backup-archive",
+  "BucketDirPath": "2020/UNDP-Kenya"
+}
