@@ -15,7 +15,8 @@
       ],
       "TestContactUUIDs": [
         "eed078e5-7d13-4f3c-ac93-8b477125b31d",
-        "67836f40-a155-4757-850c-b407bd1cd475"
+        "67836f40-a155-4757-850c-b407bd1cd475",
+        "9651e5f4-feca-4d51-a143-5c66e77ec751"
       ]
     },
     {
@@ -67,9 +68,9 @@
     {"RapidProKey": "Age (Text) - undp_kenya_s01_demog", "PipelineKey": "age_raw"},
     {"RapidProKey": "Age (Time) - undp_kenya_s01_demog", "PipelineKey": "age_time"}
   ],
-  "ProjectStartDate": "2000-01-01T00:00:00+03:00",
+  "ProjectStartDate": "2020-10-12T00:00:00+03:00",
   "ProjectEndDate": "2100-01-01T00:00:00+03:00",
-  "FilterTestMessages": false,
+  "FilterTestMessages": true,
   "MoveWSMessages": true,
   "AutomatedAnalysis": {
     "GenerateCountyThemeDistributionMaps": true,
