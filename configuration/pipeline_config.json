@@ -68,7 +68,7 @@
     {"RapidProKey": "Age (Text) - undp_kenya_s01_demog", "PipelineKey": "age_raw"},
     {"RapidProKey": "Age (Time) - undp_kenya_s01_demog", "PipelineKey": "age_time"}
   ],
-  "ProjectStartDate": "2020-10-12T00:00:00+03:00",
+  "ProjectStartDate": "2020-10-11T00:00:00+03:00",
   "ProjectEndDate": "2100-01-01T00:00:00+03:00",
   "FilterTestMessages": true,
   "MoveWSMessages": true,
