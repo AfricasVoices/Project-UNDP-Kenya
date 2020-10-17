@@ -7,7 +7,8 @@
       "TokenFileURL": "gs://avf-credentials/covid19-2-text-it-token.txt",
       "ContactsFileName": "covid19_2_contacts",
       "ActivationFlowNames": [
-        "undp_kenya_s01e01_activation"
+        "undp_kenya_s01e01_activation",
+        "undp_kenya_s01e02_activation"
       ],
       "SurveyFlowNames": [
         "undp_kenya_s01_demog",
@@ -47,6 +48,10 @@
     {"RapidProKey": "Rqa_S01E01 (Run ID) - undp_kenya_s01e01_activation", "PipelineKey": "rqa_s01e01_run_id"},
     {"RapidProKey": "Rqa_S01E01 (Time) - undp_kenya_s01e01_activation", "PipelineKey": "sent_on"},
 
+    {"RapidProKey": "Rqa_S01E02 (Text) - undp_kenya_s01e02_activation", "PipelineKey": "rqa_s01e02_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S01E02 (Run ID) - undp_kenya_s01e02_activation", "PipelineKey": "rqa_s01e02_run_id"},
+    {"RapidProKey": "Rqa_S01E02 (Time) - undp_kenya_s01e02_activation", "PipelineKey": "sent_on"},
+
     {"RapidProKey": "Constituency (Text) - covid19_s01_demog", "PipelineKey": "location_raw"},
     {"RapidProKey": "Constituency (Time) - covid19_s01_demog", "PipelineKey": "location_time"},
     {"RapidProKey": "Gender (Text) - covid19_s01_demog", "PipelineKey": "gender_raw"},
@@ -70,7 +75,7 @@
   ],
   "ProjectStartDate": "2020-10-11T00:00:00+03:00",
   "ProjectEndDate": "2100-01-01T00:00:00+03:00",
-  "FilterTestMessages": true,
+  "FilterTestMessages": false,
   "MoveWSMessages": true,
   "AutomatedAnalysis": {
     "GenerateCountyThemeDistributionMaps": true,
