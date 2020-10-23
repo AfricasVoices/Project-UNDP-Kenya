@@ -228,7 +228,7 @@
       "MetaCode": "other",
       "StringValue": "other",
       "DisplayText": "meta: other",
-      "VisibleInCoda": false,
+      "VisibleInCoda": true,
       "NumericValue": -100110,
       "CodeID": "code-O-7ce0d2a7",
       "CodeType": "Meta"
@@ -244,7 +244,7 @@
     },
     {
       "DisplayText": "meta: about conversation",
-      "VisibleInCoda": false,
+      "VisibleInCoda": true,
       "CodeID": "code-AC-9ed22631",
       "NumericValue": -100120,
       "CodeType": "Meta",
@@ -258,7 +258,7 @@
       "MetaCode": "chasing_reply",
       "StringValue": "chasing_reply",
       "DisplayText": "meta: chasing reply",
-      "VisibleInCoda": false
+      "VisibleInCoda": true
     },
     {
       "NumericValue": -100140,
@@ -267,7 +267,7 @@
       "MetaCode": "impact",
       "StringValue": "impact",
       "DisplayText": "meta: impact",
-      "VisibleInCoda": false
+      "VisibleInCoda": true
     }
   ]
 }
