@@ -90,6 +90,54 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-ec4162b4",
+      "CodeType": "Normal",
+      "DisplayText": "good management",
+      "NumericValue": 8,
+      "StringValue": "good_management",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-13d56311",
+      "CodeType": "Normal",
+      "DisplayText": "to give enough resources to hospitals",
+      "NumericValue": 9,
+      "StringValue": "to_give_enough_resources_to_hospitals",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-1309dcc8",
+      "CodeType": "Normal",
+      "DisplayText": "paying the healthcare workers",
+      "NumericValue": 10,
+      "StringValue": "paying_the_healthcare_workers",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-fb0581d8",
+      "CodeType": "Normal",
+      "DisplayText": "educating citizens on good health behaviours",
+      "NumericValue": 11,
+      "StringValue": "educating_citizens_on_good_health_behaviours",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-5d308f62",
+      "CodeType": "Normal",
+      "DisplayText": "transparency in the health docket",
+      "NumericValue": 12,
+      "StringValue": "transparency_in_the_health_docket",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-c6f26be4",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 13,
+      "StringValue": "other_theme",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
