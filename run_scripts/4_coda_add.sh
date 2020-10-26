@@ -17,6 +17,8 @@ DATA_ROOT=$3
 DATASETS=(
     "UNDP_Kenya_s01e01"
     "UNDP_Kenya_s01e02"
+    "UNDP_Kenya_s01e03"
+    "UNDP_Kenya_s01e04"
 
     "COVID19_age"
     "COVID19_gender"
