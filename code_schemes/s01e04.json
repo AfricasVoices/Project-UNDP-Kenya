@@ -50,6 +50,14 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-365c0d29",
+      "CodeType": "Normal",
+      "DisplayText": "how spread/transmitted",
+      "NumericValue": 8,
+      "StringValue": "how_spread_transmitted",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-b68e0826",
       "CodeType": "Normal",
       "DisplayText": "follow guidelines/call for right practice",
@@ -87,6 +95,14 @@
       "DisplayText": "kenya update",
       "NumericValue": 7,
       "StringValue": "kenya_update",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-d0dea747",
+      "CodeType": "Normal",
+      "DisplayText": "government guidelines",
+      "NumericValue": 9,
+      "StringValue": "government_guidelines",
       "VisibleInCoda": true
     },
     {
