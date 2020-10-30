@@ -50,6 +50,14 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-365c0d29",
+      "CodeType": "Normal",
+      "DisplayText": "how spread/transmitted",
+      "NumericValue": 8,
+      "StringValue": "how_spread_transmitted",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-b68e0826",
       "CodeType": "Normal",
       "DisplayText": "follow guidelines/call for right practice",
@@ -87,6 +95,94 @@
       "DisplayText": "kenya update",
       "NumericValue": 7,
       "StringValue": "kenya_update",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-d0dea747",
+      "CodeType": "Normal",
+      "DisplayText": "government guidelines",
+      "NumericValue": 9,
+      "StringValue": "government_guidelines",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-5e53bacf",
+      "CodeType": "Normal",
+      "DisplayText": "selection of hospitals",
+      "NumericValue": 10,
+      "StringValue": "selection_of_hospitals",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-08e6e70a",
+      "CodeType": "Normal",
+      "DisplayText": "treatment services covered by NHIF",
+      "NumericValue": 11,
+      "StringValue": "treatment_services_covered_by_NHIF",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-e8d6cedf",
+      "CodeType": "Normal",
+      "DisplayText": "benefits of NHIF",
+      "NumericValue": 12,
+      "StringValue": "benefits_of_NHIF",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-377452e0",
+      "CodeType": "Normal",
+      "DisplayText": "general enquiries on NHIF",
+      "NumericValue": 13,
+      "StringValue": "general_enquiries_on_NHIF",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-470a4692",
+      "CodeType": "Normal",
+      "DisplayText": "good service",
+      "NumericValue": 14,
+      "StringValue": "good_service",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-6e4b6142",
+      "CodeType": "Normal",
+      "DisplayText": "family cover",
+      "NumericValue": 15,
+      "StringValue": "family_cover",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-4bea76a7",
+      "CodeType": "Normal",
+      "DisplayText": "NHIF cover after retirement",
+      "NumericValue": 16,
+      "StringValue": "NHIF_cover_after_retirement",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-64464dde",
+      "CodeType": "Normal",
+      "DisplayText": "poor service",
+      "NumericValue": 17,
+      "StringValue": "poor_service",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-1ce08110",
+      "CodeType": "Normal",
+      "DisplayText": "misappropriation of funds",
+      "NumericValue": 18,
+      "StringValue": "misappropriation_of_funds",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-ef9e60c5",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 19,
+      "StringValue": "other_theme",
       "VisibleInCoda": true
     },
     {
