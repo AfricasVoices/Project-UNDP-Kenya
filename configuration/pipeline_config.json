@@ -62,6 +62,22 @@
     {"RapidProKey": "Rqa_S01E04 (Run ID) - undp_kenya_s01e04_activation", "PipelineKey": "rqa_s01e04_run_id"},
     {"RapidProKey": "Rqa_S01E04 (Time) - undp_kenya_s01e04_activation", "PipelineKey": "sent_on"},
 
+    {"RapidProKey": "Rqa_S01E05 (Text) - undp_kenya_s01e05_activation", "PipelineKey": "rqa_s01e05_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S01E05 (Run ID) - undp_kenya_s01e05_activation", "PipelineKey": "rqa_s01e05_run_id"},
+    {"RapidProKey": "Rqa_S01E05 (Time) - undp_kenya_s01e05_activation", "PipelineKey": "sent_on"},
+
+    {"RapidProKey": "Rqa_S01E06 (Text) - undp_kenya_s01e06_activation", "PipelineKey": "rqa_s01e06_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S01E06 (Run ID) - undp_kenya_s01e06_activation", "PipelineKey": "rqa_s01e06_run_id"},
+    {"RapidProKey": "Rqa_S01E06 (Time) - undp_kenya_s01e06_activation", "PipelineKey": "sent_on"},
+
+    {"RapidProKey": "Rqa_S01E07 (Text) - undp_kenya_s01e07_activation", "PipelineKey": "rqa_s01e07_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S01E07 (Run ID) - undp_kenya_s01e07_activation", "PipelineKey": "rqa_s01e07_run_id"},
+    {"RapidProKey": "Rqa_S01E07 (Time) - undp_kenya_s01e07_activation", "PipelineKey": "sent_on"},
+
+    {"RapidProKey": "Rqa_S01E08 (Text) - undp_kenya_s01e08_activation", "PipelineKey": "rqa_s01e08_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S01E08 (Run ID) - undp_kenya_s01e08_activation", "PipelineKey": "rqa_s01e08_run_id"},
+    {"RapidProKey": "Rqa_S01E08 (Time) - undp_kenya_s01e08_activation", "PipelineKey": "sent_on"},
+
     {"RapidProKey": "Constituency (Text) - covid19_s01_demog", "PipelineKey": "location_raw"},
     {"RapidProKey": "Constituency (Time) - covid19_s01_demog", "PipelineKey": "location_time"},
     {"RapidProKey": "Gender (Text) - covid19_s01_demog", "PipelineKey": "gender_raw"},
