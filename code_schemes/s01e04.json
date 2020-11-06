@@ -106,6 +106,46 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-dc8c1a62",
+      "CodeType": "Normal",
+      "DisplayText": "increased corruption",
+      "NumericValue": 10,
+      "StringValue": "increased_corruption",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-a93f5b93",
+      "CodeType": "Normal",
+      "DisplayText": "to improve healthcare infrastructure",
+      "NumericValue": 11,
+      "StringValue": "to_improve_healthcare_infrastructure",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-cd8b2054",
+      "CodeType": "Normal",
+      "DisplayText": "poor resource management",
+      "NumericValue": 12,
+      "StringValue": "poor_resource_management",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-b3f8f4cd",
+      "CodeType": "Normal",
+      "DisplayText": "poor services",
+      "NumericValue": 13,
+      "StringValue": "poor_services",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-8ac0109d",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 14,
+      "StringValue": "other_theme",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
