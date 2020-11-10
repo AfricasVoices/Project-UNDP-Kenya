@@ -1,5 +1,8 @@
+from core_data_modules.cleaners import Codes
 from core_data_modules.logging import Logger
 from dateutil.parser import isoparse
+
+from src.lib.configuration_objects import CodingModes
 
 log = Logger(__name__)
 
@@ -123,4 +126,40 @@ class MessageFilters(object):
         filtered = [td for td in messages if not noise_fn(td.get(message_key))]
         log.info(f"Filtered out messages identified as noise. "
                  f"Returning {len(filtered)}/{len(messages)} messages.")
+        return filtered
+
+    @staticmethod
+    def filter_noise_other_channel(messages, coding_plans):
+        """
+        Filters out messages from individuals who have any RQA or survey message labelled as Codes.NOISE_OTHER_CHANNEL.
+
+        :param messages: List of message objects to filter.
+        :type messages: list of TracedData
+        :param coding_plans: Coding plans under which to check for noise.
+        :type coding_plans: list of CodingPlan
+        :return: Filtered list.
+        :rtype: list of TracedData
+        """
+        noise_other_channel_uuids = set()
+        for td in messages:
+            codes = []
+            for plan in coding_plans:
+                for cc in plan.coding_configurations:
+                    if cc.coding_mode == CodingModes.SINGLE:
+                        if cc.coded_field in td:
+                            label = td[cc.coded_field]
+                            codes.append(cc.code_scheme.get_code_with_code_id(label["CodeID"]).control_code)
+                    else:
+                        assert cc.coding_mode == CodingModes.MULTIPLE
+                        for label in td.get(cc.coded_field, []):
+                            codes.append(cc.code_scheme.get_code_with_code_id(label["CodeID"]).control_code)
+
+            if Codes.NOISE_OTHER_CHANNEL in codes:
+                noise_other_channel_uuids.add(td['uid'])
+
+        filtered = [td for td in messages if td['uid'] not in noise_other_channel_uuids]
+
+        log.info(f"Filtered out noise other project messages from {len(noise_other_channel_uuids)} uuids. "
+                 f"Returning {len(filtered)}/{len(messages)} messages.")
+
         return filtered

@@ -173,6 +173,15 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-NOC-4eb70633",
+      "ControlCode": "NOC",
+      "StringValue": "NOC",
+      "DisplayText": "Noise (Other Channel)",
+      "VisibleInCoda": true,
+      "NumericValue": -60,
+      "CodeType": "Control"
+    },
+    {
       "CodeID": "code-NR-5e3eee23",
       "CodeType": "Control",
       "ControlCode": "NR",
