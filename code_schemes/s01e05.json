@@ -106,6 +106,62 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-788c3548",
+      "CodeType": "Normal",
+      "DisplayText": "public health participation",
+      "NumericValue": 10,
+      "StringValue": "public_health_participation",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-68a1523a",
+      "CodeType": "Normal",
+      "DisplayText": "speaking out against poor services/malpractices",
+      "NumericValue": 11,
+      "StringValue": "speaking_out_against_poor_services_or_malpractices",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-0811abcc",
+      "CodeType": "Normal",
+      "DisplayText": "transparency in the health docket",
+      "NumericValue": 12,
+      "StringValue": "transparency_in_the_health_docket",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-f3870652",
+      "CodeType": "Normal",
+      "DisplayText": "strengthening primary health care education",
+      "NumericValue": 13,
+      "StringValue": "strengthening_primary_health_care_education",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-cf76c45b",
+      "CodeType": "Normal",
+      "DisplayText": "equipping health centers with enough drugs",
+      "NumericValue": 14,
+      "StringValue": "equipping_health_centers_with_enough_drugs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-fc9dc0fb",
+      "CodeType": "Normal",
+      "DisplayText": "public to follow good health behaviours",
+      "NumericValue": 15,
+      "StringValue": "public_to_follow_good_health_behaviours",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-763d15ac",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 16,
+      "StringValue": "other_theme",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
