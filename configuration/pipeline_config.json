@@ -14,7 +14,8 @@
         "undp_kenya_s01e05_activation",
         "undp_kenya_s01e06_activation",
         "undp_kenya_s01e07_activation",
-        "undp_kenya_s01e08_activation"
+        "undp_kenya_s01e08_activation",
+        "undp_kenya_noise_handler"
       ],
       "SurveyFlowNames": [
         "undp_kenya_s01_demog",
@@ -47,6 +48,14 @@
     "FirebaseCredentialsFileURL": "gs://avf-credentials/avf-id-infrastructure-firebase-adminsdk-6xps8-b9173f2bfd.json",
     "TableName": "UNDP_Kenya_phone_number_avf_phone_id"
   },
+  "TimestampRemappings": [
+    {
+      "TimeKey": "Noise_Message (Time) - undp_kenya_noise_handler",
+      "ShowPipelineKeyToRemapTo": "rqa_s01e06_raw",
+      "RangeStartInclusive": "2020-11-13T15:00:00+03:00",
+      "RangeEndExclusive": "2020-11-19T24:00:00+03:00"
+    }
+  ],
   "RapidProKeyRemappings": [
     {"RapidProKey": "avf_phone_id", "PipelineKey": "uid"},
     
@@ -81,6 +90,10 @@
     {"RapidProKey": "Rqa_S01E08 (Text) - undp_kenya_s01e08_activation", "PipelineKey": "rqa_s01e08_raw", "IsActivationMessage": true},
     {"RapidProKey": "Rqa_S01E08 (Run ID) - undp_kenya_s01e08_activation", "PipelineKey": "rqa_s01e08_run_id"},
     {"RapidProKey": "Rqa_S01E08 (Time) - undp_kenya_s01e08_activation", "PipelineKey": "sent_on"},
+
+    {"RapidProKey": "Noise_Message (Text) - undp_kenya_noise_handler", "PipelineKey": "noise_message_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Noise_Message (Run ID) - undp_kenya_noise_handler", "PipelineKey": "noise_message_run_id"},
+    {"RapidProKey": "Noise_Message (Time) - undp_kenya_noise_handler", "PipelineKey": "sent_on"},
 
     {"RapidProKey": "Constituency (Text) - covid19_s01_demog", "PipelineKey": "location_raw"},
     {"RapidProKey": "Constituency (Time) - covid19_s01_demog", "PipelineKey": "location_time"},
