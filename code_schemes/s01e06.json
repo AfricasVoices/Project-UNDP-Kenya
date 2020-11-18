@@ -133,6 +133,24 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-NM-322fd101",
+      "ControlCode": "NM",
+      "StringValue": "NM",
+      "DisplayText": "Noise (Mradi)",
+      "VisibleInCoda": true,
+      "NumericValue": -200,
+      "CodeType": "Control"
+    },
+    {
+      "CodeID": "code-NCT-9be4cbb8",
+      "ControlCode": "NCT",
+      "StringValue": "NCT",
+      "DisplayText": "Noise (cash transfer)",
+      "VisibleInCoda": true,
+      "NumericValue": -210,
+      "CodeType": "Control"
+    },
+    {
       "CodeID": "code-NOC-4eb70633",
       "ControlCode": "NOC",
       "StringValue": "NOC",
