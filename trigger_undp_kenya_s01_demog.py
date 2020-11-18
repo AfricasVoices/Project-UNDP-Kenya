@@ -88,4 +88,4 @@ if __name__ == "__main__":
         log.debug(urn)
         # (The API supports sending up to 100 URNs at once. This code opts to send one at a time, which is slower but
         #  keeps the code simple and makes it easier to debug by preventing partial successes/failures)
-        # rapid_pro.rapid_pro.create_flow_start(flow_id, urns=[urn], restart_participants=False)
+        rapid_pro.rapid_pro.create_flow_start(flow_id, urns=[urn], restart_participants=False)
