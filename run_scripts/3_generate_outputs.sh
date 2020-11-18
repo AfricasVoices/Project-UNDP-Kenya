@@ -46,4 +46,4 @@ cd ..
     "$DATA_ROOT/Outputs/messages_traced_data.jsonl" "$DATA_ROOT/Outputs/individuals_traced_data.jsonl" \
     "$DATA_ROOT/Outputs/ICR/" "$DATA_ROOT/Outputs/Coda Files/" \
     "$DATA_ROOT/Outputs/messages.csv" "$DATA_ROOT/Outputs/individuals.csv" \
-    "$DATA_ROOT/Outputs/production.csv"
+    "$DATA_ROOT/Outputs/production.csv" "$DATA_ROOT/Outputs/demog_safe_uuids.json"
