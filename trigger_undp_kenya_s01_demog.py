@@ -88,6 +88,7 @@ if __name__ == "__main__":
         # Filter out people who received the ke_urban demogs on the morning of Nov. 19th.
         # These dates should exactly match those in the key remapping in the pipeline config
         and not isoparse("2020-11-18T23:20:00+03:00") < urn_to_contact[urn].created_on < isoparse("2020-11-19T13:40:00+03:00")
+        and not isoparse("2020-11-18T09:23:00+03:00") < urn_to_contact[urn].created_on < isoparse("2020-11-18T18:13:00+03:00")
     }
     log.info(f"Filtered for {len(urns_to_send_to)}/{len(safe_urns)} urns")
 
