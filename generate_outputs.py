@@ -123,7 +123,6 @@ if __name__ == "__main__":
         # Check the RQA messages only because we can make a decision based on the first messages that come in
         # (and people who sent noise shouldn't have demog responses to check anyway).
         for td in individuals_data:
-            print(td["uid"])
             if td["consent_withdrawn"] == Codes.TRUE:
                 continue
 
@@ -133,7 +132,6 @@ if __name__ == "__main__":
                     for label in td[cc.coded_field]:
                         code = cc.code_scheme.get_code_with_code_id(label["CodeID"])
                         if code.control_code in {"NM", "NCT", "NOC", "NR"} or code.meta_code in {"escalate"}:
-                            print(cc.coded_field, code.control_code, code.meta_code)
                             safe = False
 
             if safe:
