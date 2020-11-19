@@ -11,6 +11,7 @@ from src.lib import PipelineConfiguration
 
 log = Logger(__name__)
 
+# TODO: Read these from pipeline configuration rather than hard-coding
 rapid_pro_domain = "textit.in"
 rapid_pro_token_url = "gs://avf-credentials/covid19-2-text-it-token.txt"
 demog_flow_name = "undp_kenya_s01_demog"
@@ -25,7 +26,8 @@ if __name__ == "__main__":
     parser.add_argument("pipeline_configuration_file_path", metavar="pipeline-configuration-file",
                         help="Path to the pipeline configuration json file")
     parser.add_argument("avf_uuid_file_path", metavar="avf-uuid-file-path",
-                        help="Domain that the first workspace of Rapid Pro is running on")
+                        help="Path to a json file containing a list of avf uuids that it's safe to trigger "
+                             "the demog flow to")
 
     args = parser.parse_args()
 
@@ -78,7 +80,10 @@ if __name__ == "__main__":
     log.info(f"Filtering the urns who haven't received demogs before")
     urns_to_send_to = {urn for urn in safe_urns
                        if urn_to_contact[urn].fields[demogs_attempted_variable] is None
-                       and urn_to_contact[urn].created_on > isoparse("2020-10-07T00:00+00:00")}
+                       # Filter for people created since the project started. People created before then went through
+                       # the demogs flow, but may not have been asked any questions/been assigned the demogs_attempted
+                       # variable if they had already completed them last season, so we can skip these.
+                       and urn_to_contact[urn].created_on > pipeline_configuration.project_start_date}
     log.info(f"Filtered for {len(urns_to_send_to)}/{len(safe_urns)} urns")
 
     log.info(f"Triggering the demog flow for {len(urns_to_send_to)} safe URNs who haven't received demog questions yet")
@@ -88,4 +93,5 @@ if __name__ == "__main__":
         log.debug(urn)
         # (The API supports sending up to 100 URNs at once. This code opts to send one at a time, which is slower but
         #  keeps the code simple and makes it easier to debug by preventing partial successes/failures)
+        # TODO: Move to RapidProClient. For now, use the underlying TembaClient object to create a flow start.
         rapid_pro.rapid_pro.create_flow_start(flow_id, urns=[urn], restart_participants=False)
