@@ -1,5 +1,7 @@
 import argparse
+import json
 
+from core_data_modules.cleaners import Codes
 from core_data_modules.logging import Logger
 from core_data_modules.traced_data.io import TracedDataJsonIO
 from core_data_modules.util import IOUtils
@@ -44,6 +46,9 @@ if __name__ == "__main__":
     parser.add_argument("production_csv_output_path", metavar="production-csv-output-path",
                         help="Path to a CSV file to write raw message and demographic responses to, for use in "
                              "radio show production"),
+    parser.add_argument("demog_safe_uuids_output_path", metavar="demog-safe-uuids-output-path",
+                        help="Path to a JSON file to write the avf-uuids that are safe to send demographics messages "
+                             "to. These are individuals who don't have the label NR, NM, NCT, NOC, escalate, or STOP")
 
     args = parser.parse_args()
 
@@ -62,6 +67,7 @@ if __name__ == "__main__":
     csv_by_message_output_path = args.csv_by_message_output_path
     csv_by_individual_output_path = args.csv_by_individual_output_path
     production_csv_output_path = args.production_csv_output_path
+    demog_safe_uuids_output_path = args.demog_safe_uuids_output_path
 
     # Load the pipeline configuration file
     log.info("Loading Pipeline Configuration File...")
@@ -110,6 +116,31 @@ if __name__ == "__main__":
         log.info("Generating Analysis CSVs...")
         messages_data, individuals_data = AnalysisFile.generate(user, data, csv_by_message_output_path,
                                                                 csv_by_individual_output_path)
+
+        log.info("Finding uuids it is safe to send demogs to...")
+        demog_safe_uuids = []
+        # It's safe to send to anyone who isn't labelled as escalate, noise, NR, or STOP.
+        # Check the RQA messages only because we can make a decision based on the first messages that come in
+        # (and people who sent noise shouldn't have demog responses to check anyway).
+        for td in individuals_data:
+            if td["consent_withdrawn"] == Codes.TRUE:
+                continue
+
+            safe = True
+            for plan in PipelineConfiguration.RQA_CODING_PLANS:
+                for cc in plan.coding_configurations:
+                    for label in td[cc.coded_field]:
+                        code = cc.code_scheme.get_code_with_code_id(label["CodeID"])
+                        if code.control_code in {"NM", "NCT", "NOC", "NR"} or code.meta_code in {"escalate"}:
+                            safe = False
+
+            if safe:
+                demog_safe_uuids.append(td["uid"])
+        log.info(f"Found {len(demog_safe_uuids)} individuals it is safe to send demogs to, "
+                 f"out of {len(individuals_data)} total individuals")
+        log.info(f"Writing demog safe uuids to {demog_safe_uuids_output_path}...")
+        with open(demog_safe_uuids_output_path, "w") as f:
+            json.dump(demog_safe_uuids, f, indent=2)
 
         log.info("Writing messages TracedData to file...")
         IOUtils.ensure_dirs_exist_for_file(messages_json_output_path)

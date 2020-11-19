@@ -25,12 +25,12 @@ done
 
 
 # Check that the correct number of arguments were provided.
-if [[ $# -ne 13 ]]; then
+if [[ $# -ne 14 ]]; then
     echo "Usage: ./docker-run-generate-outputs.sh
     [--profile-cpu <profile-output-path>] [--profile-memory <profile-output-path>]
     <user> <pipeline-run-mode> <pipeline-configuration-file-path>
     <raw-data-dir> <prev-coded-dir> <messages-json-output-path> <individuals-json-output-path>
-    <icr-output-dir> <coded-output-dir> <messages-output-csv> <individuals-output-csv> <production-output-csv>"
+    <icr-output-dir> <coded-output-dir> <messages-output-csv> <individuals-output-csv> <production-output-csv> <demog-safe-uuids-output-json>"
     exit
 fi
 
@@ -48,6 +48,7 @@ OUTPUT_CODED_DIR=${10}
 OUTPUT_MESSAGES_CSV=${11}
 OUTPUT_INDIVIDUALS_CSV=${12}
 OUTPUT_PRODUCTION_CSV=${13}
+OUTPUT_DEMOG_SAFE_UUIDS_JSON=${14}
 
 # Build an image for this pipeline stage.
 docker build --build-arg INSTALL_MEMORY_PROFILER="$PROFILE_MEMORY" -t "$IMAGE_NAME" .
@@ -64,6 +65,7 @@ CMD="pipenv run $PROFILE_MEMORY_CMD python -u $PROFILE_CPU_CMD generate_outputs.
     \"$USER\" \"$PIPELINE_RUN_MODE\" /data/pipeline_configuration.json /data/raw-data /data/prev-coded \
      /data/auto-coding-traced-data.jsonl /data/output-messages.jsonl /data/output-individuals.jsonl /data/output-icr /data/coded \
     /data/output-messages.csv /data/output-individuals.csv /data/output-production.csv \
+    /data/output-demog-safe-uuids.json \
 "
 container="$(docker container create ${SYS_PTRACE_CAPABILITY} -w /app "$IMAGE_NAME" /bin/bash -c "$CMD")"
 echo "Created container $container"
@@ -116,6 +118,10 @@ if [[ $PIPELINE_RUN_MODE = "all-stages" ]]; then
     echo "Copying $container_short_id:/data/output-individuals.csv -> $OUTPUT_INDIVIDUALS_CSV"
     mkdir -p "$(dirname "$OUTPUT_INDIVIDUALS_CSV")"
     docker cp "$container:/data/output-individuals.csv" "$OUTPUT_INDIVIDUALS_CSV"
+
+    echo "Copying $container_short_id:/data/output-demog-safe-uuids.json -> $OUTPUT_DEMOG_SAFE_UUIDS_JSON"
+    mkdir -p "$(dirname "$OUTPUT_INDIVIDUALS_CSV")"
+    docker cp "$container:/data/output-demog-safe-uuids.json" "$OUTPUT_DEMOG_SAFE_UUIDS_JSON"
 
 elif [[ $PIPELINE_RUN_MODE = "auto-code-only" ]]; then
     echo "copying auto-coding-traced-data.jsonl to "$OUTPUT_AUTO_CODING_TRACED_JSONL" "
