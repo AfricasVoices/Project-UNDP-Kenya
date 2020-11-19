@@ -61,6 +61,12 @@
       "ShowPipelineKeyToRemapTo": "rqa_s01e06_raw",
       "RangeStartInclusive": "2020-11-18T23:20:00+03:00",
       "RangeEndExclusive": "2020-11-19T13:40:00+03:00"
+    },
+    {
+      "TimeKey": "Rqa_S01E06 (Time) - covid19_ke_urban_s01e06_activation",
+      "ShowPipelineKeyToRemapTo": "rqa_s01e06_raw",
+      "RangeStartInclusive": "2020-11-18T09:23:00+03:00",
+      "RangeEndExclusive": "2020-11-18T18:13:00+03:00"
     }
   ],
   "RapidProKeyRemappings": [
