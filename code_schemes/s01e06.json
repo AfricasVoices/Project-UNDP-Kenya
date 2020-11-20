@@ -201,7 +201,7 @@
       "CodeID": "code-NCT-9be4cbb8",
       "ControlCode": "NCT",
       "StringValue": "NCT",
-      "DisplayText": "Noise (cash transfer)",
+      "DisplayText": "Noise (Cash Transfer)",
       "VisibleInCoda": true,
       "NumericValue": -210,
       "CodeType": "Control"

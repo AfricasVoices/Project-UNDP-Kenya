@@ -133,6 +133,24 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-NM-322fd101",
+      "ControlCode": "NM",
+      "StringValue": "NM",
+      "DisplayText": "Noise (Mradi)",
+      "VisibleInCoda": true,
+      "NumericValue": -200,
+      "CodeType": "Control"
+    },
+    {
+      "CodeID": "code-NCT-9be4cbb8",
+      "ControlCode": "NCT",
+      "StringValue": "NCT",
+      "DisplayText": "Noise (Cash Transfer)",
+      "VisibleInCoda": true,
+      "NumericValue": -210,
+      "CodeType": "Control"
+    },
+    {
       "CodeID": "code-NOC-4eb70633",
       "ControlCode": "NOC",
       "StringValue": "NOC",
@@ -185,6 +203,15 @@
       "NumericValue": -110,
       "StringValue": "CE",
       "VisibleInCoda": false
+    },
+    {
+      "CodeID": "code-RTN-f73d6204",
+      "CodeType": "Meta",
+      "MetaCode": "reaction_to_noise",
+      "DisplayText": "meta: reaction to noise",
+      "NumericValue": -200000,
+      "StringValue": "reaction_to_noise",
+      "VisibleInCoda": true
     },
     {
       "CodeID": "code-PB-a434a800",
