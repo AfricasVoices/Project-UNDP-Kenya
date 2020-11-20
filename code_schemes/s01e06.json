@@ -205,6 +205,15 @@
       "VisibleInCoda": false
     },
     {
+      "CodeID": "code-RTN-f73d6204",
+      "CodeType": "Meta",
+      "MetaCode": "reaction_to_noise",
+      "DisplayText": "meta: reaction to noise",
+      "NumericValue": -200000,
+      "StringValue": "reaction_to_noise",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-PB-a434a800",
       "CodeType": "Meta",
       "MetaCode": "push_back",
