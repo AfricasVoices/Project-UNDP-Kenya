@@ -15,7 +15,8 @@
         "undp_kenya_s01e06_activation",
         "undp_kenya_s01e07_activation",
         "undp_kenya_s01e08_activation",
-        "undp_kenya_noise_handler"
+        "undp_kenya_noise_handler",
+        "covid19_ke_urban_s01e06_activation"
       ],
       "SurveyFlowNames": [
         "undp_kenya_s01_demog",
@@ -54,6 +55,18 @@
       "ShowPipelineKeyToRemapTo": "rqa_s01e06_raw",
       "RangeStartInclusive": "2020-11-13T15:00:00+03:00",
       "RangeEndExclusive": "2020-11-19T24:00:00+03:00"
+    },
+    {
+      "TimeKey": "Rqa_S01E06 (Time) - covid19_ke_urban_s01e06_activation",
+      "ShowPipelineKeyToRemapTo": "rqa_s01e06_raw",
+      "RangeStartInclusive": "2020-11-18T23:20:00+03:00",
+      "RangeEndExclusive": "2020-11-19T13:40:00+03:00"
+    },
+    {
+      "TimeKey": "Rqa_S01E06 (Time) - covid19_ke_urban_s01e06_activation",
+      "ShowPipelineKeyToRemapTo": "rqa_s01e06_raw",
+      "RangeStartInclusive": "2020-11-18T09:23:00+03:00",
+      "RangeEndExclusive": "2020-11-18T18:13:00+03:00"
     }
   ],
   "RapidProKeyRemappings": [
@@ -94,6 +107,10 @@
     {"RapidProKey": "Noise_Message (Text) - undp_kenya_noise_handler", "PipelineKey": "noise_message_raw", "IsActivationMessage": true},
     {"RapidProKey": "Noise_Message (Run ID) - undp_kenya_noise_handler", "PipelineKey": "noise_message_run_id"},
     {"RapidProKey": "Noise_Message (Time) - undp_kenya_noise_handler", "PipelineKey": "sent_on"},
+
+    {"RapidProKey": "Rqa_S01E06 (Text) - covid19_ke_urban_s01e06_activation", "PipelineKey": "covid19_ke_urban_rqa_s01e06_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S01E06 (Run ID) - covid19_ke_urban_s01e06_activation", "PipelineKey": "covid19_ke_urban_rqa_s01e06_run_id"},
+    {"RapidProKey": "Rqa_S01E06 (Time) - covid19_ke_urban_s01e06_activation", "PipelineKey": "sent_on"},
 
     {"RapidProKey": "Constituency (Text) - covid19_s01_demog", "PipelineKey": "location_raw"},
     {"RapidProKey": "Constituency (Time) - covid19_s01_demog", "PipelineKey": "location_time"},
