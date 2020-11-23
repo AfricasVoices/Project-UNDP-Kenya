@@ -106,6 +106,62 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-632b37be",
+      "CodeType": "Normal",
+      "DisplayText": "disruption of normal services",
+      "NumericValue": 10,
+      "StringValue": "disruption_of_normal_services",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-139b9c19",
+      "CodeType": "Normal",
+      "DisplayText": "poor services",
+      "NumericValue": 11,
+      "StringValue": "poor_services",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-255ecfd1",
+      "CodeType": "Normal",
+      "DisplayText": "lack of drugs in the hospitals",
+      "NumericValue": 12,
+      "StringValue": "lack_of_drugs_in_the_hospitals",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-048a6fa3",
+      "CodeType": "Normal",
+      "DisplayText": "high cost of treatment",
+      "NumericValue": 13,
+      "StringValue": "high_cost_of_treatment",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-c26aefcf",
+      "CodeType": "Normal",
+      "DisplayText": "improvement of health services",
+      "NumericValue": 14,
+      "StringValue": "improvement_of_health_services",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-5ead51c0",
+      "CodeType": "Normal",
+      "DisplayText": "questions about kidney disease and other ailments",
+      "NumericValue": 15,
+      "StringValue": "questions_about_kidney_disease_and_other_ailments",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-4ba7579b",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 16,
+      "StringValue": "other_theme",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
