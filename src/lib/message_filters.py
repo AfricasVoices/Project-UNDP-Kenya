@@ -129,9 +129,10 @@ class MessageFilters(object):
         return filtered
 
     @staticmethod
-    def filter_noise_other_channel(messages, coding_plans):
+    def filter_noise_codes(messages, coding_plans):
         """
-        Filters out messages from individuals who have any RQA or survey message labelled as Codes.NOISE_OTHER_CHANNEL.
+        Filters out messages from individuals who have any RQA or survey message labelled as Codes.NOISE_OTHER_CHANNEL,
+        or the UNDP-specific 'Noise (Mradi)' or 'Noise (Cash Transfer)'
 
         :param messages: List of message objects to filter.
         :type messages: list of TracedData
@@ -140,7 +141,7 @@ class MessageFilters(object):
         :return: Filtered list.
         :rtype: list of TracedData
         """
-        noise_other_channel_uuids = set()
+        noise_uuids = set()
         for td in messages:
             codes = []
             for plan in coding_plans:
@@ -154,12 +155,12 @@ class MessageFilters(object):
                         for label in td.get(cc.coded_field, []):
                             codes.append(cc.code_scheme.get_code_with_code_id(label["CodeID"]).control_code)
 
-            if Codes.NOISE_OTHER_CHANNEL in codes:
-                noise_other_channel_uuids.add(td['uid'])
+            if Codes.NOISE_OTHER_CHANNEL in codes or "NM" in codes or "NCT" in codes:
+                noise_uuids.add(td['uid'])
 
-        filtered = [td for td in messages if td['uid'] not in noise_other_channel_uuids]
+        filtered = [td for td in messages if td['uid'] not in noise_uuids]
 
-        log.info(f"Filtered out noise other project messages from {len(noise_other_channel_uuids)} uuids. "
+        log.info(f"Filtered out noise other project messages from {len(noise_uuids)} uuids. "
                  f"Returning {len(filtered)}/{len(messages)} messages.")
 
         return filtered
