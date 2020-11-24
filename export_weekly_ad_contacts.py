@@ -1,6 +1,7 @@
 import argparse
 import csv
 import json
+import sys
 
 from core_data_modules.cleaners import Codes
 from core_data_modules.logging import Logger
@@ -37,6 +38,8 @@ if __name__ == "__main__":
     pipeline_configuration_file_path = args.pipeline_configuration_file_path
     traced_data_paths = args.traced_data_paths
     csv_output_file_path = args.csv_output_file_path
+
+    sys.setrecursionlimit(10000)
 
     log.info("Loading Pipeline Configuration File...")
     with open(pipeline_configuration_file_path) as f:
