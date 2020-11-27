@@ -106,6 +106,46 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-e03d9990",
+      "CodeType": "Normal",
+      "DisplayText": "enhance healthcare workers' welfare and benefits",
+      "NumericValue": 10,
+      "StringValue": "enhance_healthcare_workers_welfare_and_benefits",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-81a569e6",
+      "CodeType": "Normal",
+      "DisplayText": "better equipment including PPE for healthcare workers",
+      "NumericValue": 11,
+      "StringValue": "better_equipment_including_PPE_for_healthcare_workers",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-4005b463",
+      "CodeType": "Normal",
+      "DisplayText": "health insurance for healthcare workers",
+      "NumericValue": 12,
+      "StringValue": "health_insurance_for_healthcare_workers",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-574f0ee8",
+      "CodeType": "Normal",
+      "DisplayText": "health docket to be reverted back to the national government",
+      "NumericValue": 13,
+      "StringValue": "health_docket_to_be_reverted_back_to_the_national_government",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-bcdcf90e",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 14,
+      "StringValue": "other_theme",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
