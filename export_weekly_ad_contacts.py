@@ -61,7 +61,7 @@ if __name__ == "__main__":
     log.info("Initialised the Firestore UUID table")
 
     uuids = set()
-    skipped_nr = 0
+    skipped = 0
     for path in traced_data_paths:
         # Load the traced data
         log.info(f"Loading previous traced data from file '{path}'...")
@@ -73,8 +73,19 @@ if __name__ == "__main__":
             if td["consent_withdrawn"] == Codes.TRUE:
                 continue
 
-            uuids.add(td["uid"])
-    log.info(f"Loaded {len(uuids)} uuids from TracedData (skipped {skipped_nr} items with an NR property)")
+            safe = True
+            for plan in PipelineConfiguration.RQA_CODING_PLANS:
+                for cc in plan.coding_configurations:
+                    for label in td[cc.coded_field]:
+                        code = cc.code_scheme.get_code_with_code_id(label["CodeID"])
+                        if code.control_code in {"NM", "NCT", "NOC", "NR"}:
+                            safe = False
+
+            if safe:
+                uuids.add(td["uid"])
+            else:
+                skipped += 1
+    log.info(f"Loaded {len(uuids)} uuids from TracedData (skipped {skipped} items)")
 
     if exclusion_list_file_path is not None:
         # Load the exclusion list
