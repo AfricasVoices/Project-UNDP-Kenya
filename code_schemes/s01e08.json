@@ -106,6 +106,78 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-3d554fc9",
+      "CodeType": "Normal",
+      "DisplayText": "proper personal savings/investments",
+      "NumericValue": 10,
+      "StringValue": "proper_personal_savings_or_investments",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-b7b545b1",
+      "CodeType": "Normal",
+      "DisplayText": "observe good health practices",
+      "NumericValue": 11,
+      "StringValue": "observe_good_health_practices",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-9e09be3b",
+      "CodeType": "Normal",
+      "DisplayText": "misuse of public funds",
+      "NumericValue": 12,
+      "StringValue": "misuse_of_public_funds",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-3b489f20",
+      "CodeType": "Normal",
+      "DisplayText": "disaster/emergency planning",
+      "NumericValue": 13,
+      "StringValue": "disaster_or_emergency_planning",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-b1c8943d",
+      "CodeType": "Normal",
+      "DisplayText": "economic hardships",
+      "NumericValue": 14,
+      "StringValue": "economic_hardships",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-25b0ec36",
+      "CodeType": "Normal",
+      "DisplayText": "improving hospital infrastructure",
+      "NumericValue": 15,
+      "StringValue": "improving_hospital_infrastructure",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-95b2fad6",
+      "CodeType": "Normal",
+      "DisplayText": "poor leadership/governance",
+      "NumericValue": 16,
+      "StringValue": "poor_leadership_or_governance",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-268e0be6",
+      "CodeType": "Normal",
+      "DisplayText": "helping each other",
+      "NumericValue": 17,
+      "StringValue": "helping_each_other",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-21c8b6b7",
+      "CodeType": "Normal",
+      "DisplayText": "other theme",
+      "NumericValue": 18,
+      "StringValue": "other_theme",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
