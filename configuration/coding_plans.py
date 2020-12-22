@@ -157,6 +157,23 @@ def get_rqa_coding_plans(pipeline_name):
                        )
                    ],
                    ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("UNDP-Kenya s01e08"),
+                   raw_field_fold_strategy=FoldStrategies.concatenate),
+
+        CodingPlan(raw_field="s01_close_out_raw",
+                   time_field="sent_on",
+                   run_id_field="s01_close_out_run_id",
+                   coda_filename="UNDP_Kenya_s01_close_out.json",
+                   icr_filename="s01_close_out.csv",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.S01_CLOSE_OUT,
+                           coded_field="s01_close_out_coded",
+                           analysis_file_key="s01_close_out",
+                           fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S01_CLOSE_OUT, x, y)
+                       )
+                   ],
+                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("UNDP-Kenya s01 close out"),
                    raw_field_fold_strategy=FoldStrategies.concatenate)
     ]
 

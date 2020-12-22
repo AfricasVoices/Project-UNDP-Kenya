@@ -23,6 +23,7 @@ DATASETS=(
     "UNDP_Kenya_s01e06"
     "UNDP_Kenya_s01e07"
     "UNDP_Kenya_s01e08"
+    "UNDP_Kenya_s01_close_out"
 
     "COVID19_age"
     "COVID19_gender"
