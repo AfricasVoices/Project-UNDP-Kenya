@@ -15,6 +15,7 @@
         "undp_kenya_s01e06_activation",
         "undp_kenya_s01e07_activation",
         "undp_kenya_s01e08_activation",
+        "undp_kenya_s01_close_out_activation",
         "undp_kenya_noise_handler",
         "covid19_ke_urban_s01e06_activation",
         "covid19_ke_urban_s01e07_activation"
@@ -110,6 +111,10 @@
     {"RapidProKey": "Rqa_S01E08 (Text) - undp_kenya_s01e08_activation", "PipelineKey": "rqa_s01e08_raw", "IsActivationMessage": true},
     {"RapidProKey": "Rqa_S01E08 (Run ID) - undp_kenya_s01e08_activation", "PipelineKey": "rqa_s01e08_run_id"},
     {"RapidProKey": "Rqa_S01E08 (Time) - undp_kenya_s01e08_activation", "PipelineKey": "sent_on"},
+
+    {"RapidProKey": "S01_Close_Out (Text) - undp_kenya_s01_close_out_activation", "PipelineKey": "s01_close_out_raw", "IsActivationMessage": true},
+    {"RapidProKey": "S01_Close_Out (Run ID) - undp_kenya_s01_close_out_activation", "PipelineKey": "s01_close_out_run_id"},
+    {"RapidProKey": "S01_Close_Out (Time) - undp_kenya_s01_close_out_activation", "PipelineKey": "sent_on"},
 
     {"RapidProKey": "Noise_Message (Text) - undp_kenya_noise_handler", "PipelineKey": "noise_message_raw", "IsActivationMessage": true},
     {"RapidProKey": "Noise_Message (Run ID) - undp_kenya_noise_handler", "PipelineKey": "noise_message_run_id"},

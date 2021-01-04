@@ -125,6 +125,17 @@
       ]
     },
     {
+      "CodeID": "code-e442c27b",
+      "CodeType": "Normal",
+      "DisplayText": "UNDP-Kenya s01 close out",
+      "StringValue": "undp_kenya_s01_close_out",
+      "NumericValue": 20,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "UNDP-Kenya s01 close out"
+      ]
+    },
+    {
       "CodeID": "code-9bd0f2b1",
       "CodeType": "Normal",
       "DisplayText": "COVID19 s01e01",
