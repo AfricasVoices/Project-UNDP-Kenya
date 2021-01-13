@@ -25,6 +25,8 @@ if __name__ == "__main__":
     parser.add_argument("traced_data_paths", metavar="traced-data-paths", nargs="+",
                         help="Paths to the traced data files (either messages or individuals) to extract phone "
                              "numbers from")
+    parser.add_argument("opt_in_dataset_name", metavar="opt-in-dataset-name",
+                        help="`dataset_name` of the coding plan to use to search for opt-ins")
     parser.add_argument("csv_output_file_path", metavar="csv-output-file-path",
                         help="Path to a CSV file to write the contacts to. "
                              "Exported file is in a format suitable for direct upload to Rapid Pro")
@@ -34,6 +36,7 @@ if __name__ == "__main__":
     google_cloud_credentials_file_path = args.google_cloud_credentials_file_path
     pipeline_configuration_file_path = args.pipeline_configuration_file_path
     traced_data_paths = args.traced_data_paths
+    opt_in_dataset_name = args.opt_in_dataset_name
     csv_output_file_path = args.csv_output_file_path
 
     sys.setrecursionlimit(10000)
@@ -71,20 +74,21 @@ if __name__ == "__main__":
             if td["consent_withdrawn"] == Codes.TRUE:
                 continue
 
-            plan = PipelineConfiguration.RQA_CODING_PLANS[8]
-            assert plan.raw_field == "s01_close_out_raw"
+            for plan in PipelineConfiguration.RQA_CODING_PLANS:
+                if plan.dataset_name != opt_in_dataset_name:
+                    continue
 
-            opt_in = False
-            for cc in plan.coding_configurations:
-                for label in td[cc.coded_field]:
-                    code = cc.code_scheme.get_code_with_code_id(label["CodeID"])
-                    if code.meta_code == "opt-in":
-                        opt_in = True
+                opt_in = False
+                for cc in plan.coding_configurations:
+                    for label in td[cc.coded_field]:
+                        code = cc.code_scheme.get_code_with_code_id(label["CodeID"])
+                        if code.meta_code == "opt-in":
+                            opt_in = True
 
-            if opt_in:
-                uuids.add(td["uid"])
-            else:
-                skipped += 1
+                if opt_in:
+                    uuids.add(td["uid"])
+                else:
+                    skipped += 1
     log.info(f"Loaded {len(uuids)} uuids from TracedData (skipped {skipped} items)")
 
     # Convert the uuids to phone numbers
