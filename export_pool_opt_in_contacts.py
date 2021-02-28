@@ -10,6 +10,7 @@ from id_infrastructure.firestore_uuid_table import FirestoreUuidTable
 from storage.google_cloud import google_cloud_utils
 
 from src.lib import PipelineConfiguration
+from configuration.code_schemes import CodeSchemes
 
 log = Logger(__name__)
 
@@ -17,6 +18,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Exports phone numbers of people who opted into AVF's Kenya "
                                                  "Pool at the end of the project")
 
+    parser.add_argument("target_counties", nargs="*", metavar="target-counties",
+                        help="List of kenyan counties to derive contacts from, use the StringValue in kenya_county code scheme"
+                             "or don't pass the argument to generate contacts from all counties")
     parser.add_argument("google_cloud_credentials_file_path", metavar="google-cloud-credentials-file-path",
                         help="Path to a Google Cloud service account credentials file to use to access the "
                              "credentials bucket")
@@ -33,6 +37,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    target_counties = args.target_counties
     google_cloud_credentials_file_path = args.google_cloud_credentials_file_path
     pipeline_configuration_file_path = args.pipeline_configuration_file_path
     traced_data_paths = args.traced_data_paths
@@ -62,6 +67,7 @@ if __name__ == "__main__":
 
     uuids = set()
     skipped = 0
+    county_counts = {county:0 for county in target_counties}
     for path in traced_data_paths:
         # Load the traced data
         log.info(f"Loading previous traced data from file '{path}'...")
@@ -86,10 +92,21 @@ if __name__ == "__main__":
                             opt_in = True
 
                 if opt_in:
-                    uuids.add(td["uid"])
+                    if len(target_counties) != 0:
+                        if td["county_coded"] == Codes.STOP:
+                            continue
+
+                        county_name = CodeSchemes.KENYA_COUNTY.get_code_with_code_id(td["county_coded"]["CodeID"]).string_value
+                        #TODO: validate if county_name in target_counties is in KENYA_COUNTY StringValue
+                        if county_name in target_counties:
+                            uuids.add(td["uid"])
+                            county_counts[county_name] += 1
+                    else:
+                        uuids.add(td["uid"])
                 else:
                     skipped += 1
-    log.info(f"Loaded {len(uuids)} uuids from TracedData (skipped {skipped} items)")
+
+    log.info(f"Found (per-location counts: {county_counts}) a total of {len(uuids)} contacts (skipped {skipped} items)")
 
     # Convert the uuids to phone numbers
     log.info(f"Converting {len(uuids)} uuids to phone numbers...")
